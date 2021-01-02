@@ -16,6 +16,7 @@ const modifyFiles = [
     "LICENSE",
     "package.json",
     "rollup.config.ts",
+    "src/index.ts",
     "test/library.test.ts",
     "tools/gh-pages-publish.ts",
 ];
