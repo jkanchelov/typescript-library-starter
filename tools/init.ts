@@ -18,6 +18,7 @@ const modifyFiles = [
     "package.json",
     "rollup.config.ts",
     "src/index.ts",
+    "src/library.ts",
     "test/library.test.ts",
     "tools/gh-pages-publish.ts",
 ];
@@ -197,8 +198,8 @@ function modifyContents(libraryName: string, username: string, usermail: string)
     try {
         const changes = replace.sync({
             files,
-            from: [/--libraryname--/g, /--username--/g, /--usermail--/g],
-            to: [libraryName, username, usermail],
+            from: [/--libraryname--/g, /--libraryPascalCaseName--/g , /--username--/g, /--usermail--/g],
+            to: [libraryName, toPascalCase(libraryName),  username, usermail],
         });
         console.log(colors.yellow(modifyFiles.join("\n")));
     } catch (error) {
@@ -252,6 +253,10 @@ function finalize() {
 
 function toCamelCase(text: string) {
     return text.replace(/-\w/g, clearAndUpper);
+}
+
+function toPascalCase(text) {
+    return text.replace(/(^\w|-\w)/g, clearAndUpper);
 }
 
 function clearAndUpper(text: string) {

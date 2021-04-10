@@ -1,3 +1,3 @@
-import --libraryname-- from "./--libraryname--";
+import { --libraryPascalCaseName-- } from "./--libraryname--";
 
-export { --libraryname-- };
+export { --libraryPascalCaseName-- };
