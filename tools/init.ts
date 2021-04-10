@@ -10,8 +10,8 @@ const { readFileSync, writeFileSync } = require("fs");
 const { fork } = require("child_process");
 
 // Note: These should all be relative to the project root directory
-const rmDirs = [".git"];
-const rmFiles = [".all-contributorsrc", ".gitattributes", "tools/init.ts"];
+const rmDirs = [".git", "./tools"];
+const rmFiles = [".all-contributorsrc", ".gitattributes"];
 
 const modifyFiles = [
     "LICENSE",
