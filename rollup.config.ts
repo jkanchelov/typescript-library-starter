@@ -18,7 +18,7 @@ export default [
         input: `src/index.ts`,
         output: [{ file: pkg.main, name: camelCase(libraryName), format: "umd", sourcemap: true }],
         // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-        external: [],
+        external: [...Object.keys(pkg.peerDependencies || {})],
         watch: {
             include: "src/**",
         },
@@ -53,7 +53,7 @@ export default [
             },
         ],
         // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
-        external: [],
+        external: [...Object.keys(pkg.peerDependencies || {})],
         watch: {
             include: "src/**",
         },
