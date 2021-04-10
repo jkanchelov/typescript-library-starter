@@ -12,6 +12,7 @@ const { fork } = require("child_process");
 // Note: These should all be relative to the project root directory
 const rmDirs = [".git"];
 const rmFiles = [".all-contributorsrc", ".gitattributes", "tools/init.ts"];
+
 const modifyFiles = [
     "LICENSE",
     "package.json",
@@ -20,6 +21,7 @@ const modifyFiles = [
     "test/library.test.ts",
     "tools/gh-pages-publish.ts",
 ];
+
 const renameFiles = [
     ["src/library.ts", "src/--libraryname--.ts"],
     ["test/library.test.ts", "test/--libraryname--.test.ts"],
@@ -241,6 +243,9 @@ function finalize() {
     let jsonPackage = path.resolve(__dirname, "..", "package.json");
     const pkg = JSON.parse(readFileSync(jsonPackage) as any);
 
+    pkg.main = toCamelCase(pkg.main);
+
+
     // Note: Add items to remove from the package file here
     delete pkg.scripts.postinstall;
 
@@ -252,4 +257,12 @@ function finalize() {
     console.log(colors.green("Git hooks set up"));
 
     console.log("\n");
+}
+
+function toCamelCase(text: string) {
+    return text.replace(/-\w/g, clearAndUpper);
+}
+
+function clearAndUpper(text: string) {
+    return text.replace(/-/, "").toUpperCase();
 }
