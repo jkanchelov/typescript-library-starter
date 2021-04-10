@@ -233,12 +233,6 @@ function renameItems(libraryName: string) {
 function finalize() {
     console.log(colors.underline.white("Finalizing"));
 
-    // Recreate Git folder
-    let gitInitOutput = exec('git init "' + path.resolve(__dirname, "..") + '"', {
-        silent: true,
-    }).stdout;
-    console.log(colors.green(gitInitOutput.replace(/(\n|\r)+/g, "")));
-
     // Remove post-install command
     let jsonPackage = path.resolve(__dirname, "..", "package.json");
     const pkg = JSON.parse(readFileSync(jsonPackage) as any);
@@ -252,9 +246,6 @@ function finalize() {
     writeFileSync(jsonPackage, JSON.stringify(pkg, null, 2));
     console.log(colors.green("Postinstall script has been removed"));
 
-    // Initialize Husky
-    fork(path.resolve(__dirname, "..", "node_modules", "husky", "bin", "install"), { silent: true });
-    console.log(colors.green("Git hooks set up"));
 
     console.log("\n");
 }
