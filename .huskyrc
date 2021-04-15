@@ -1,6 +1,0 @@
-{
-    "hooks": {
-        "pre-commit": "npx pretty-quick --staged",
-        "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-}
